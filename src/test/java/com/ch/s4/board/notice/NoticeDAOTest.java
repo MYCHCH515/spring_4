@@ -26,7 +26,7 @@ public class NoticeDAOTest extends MyTestCase{
 	}
 	
 	
-	@Test
+	//@Test
 	public void setInsertTest() throws Exception{
 		
 		BoardDTO boardDTO = new BoardDTO();
