@@ -5,7 +5,7 @@
     
     <mapper namespace="com.ch.s4.board.qna.QnaDAO">
     
-    	<select id ="qnaList" resultType="QnaDTO" parameterType="Pager">
+    	<select id ="getList" resultType="QnaDTO" parameterType="Pager">
 			select * from 
 			(select rownum R, N.* from 
 			(select * from qna where 
@@ -18,7 +18,7 @@
 			where R between #{startRow} and #{lastRow}
 		</select>  
 		
-		<select id = "qnaCount" resultType="Long" parameterType="Pager">
+		<select id = "getCount" resultType="Long" parameterType="Pager">
     		select count(num) from qna
     		where 
     		<choose>
@@ -29,7 +29,7 @@
     		 like '%'||#{search}||'%'
     	</select>
     
-    	 <insert id="qnaWrite" parameterType="QnaDTO">
+    	 <insert id="setInsert" parameterType="QnaDTO">
    		 	insert into qna values(qna_seq.nextval, #{title}, #{writer}, #{contents}, sysdate, 0, qna_seq.currval, 0, 0)
    		 </insert>
    		 
@@ -42,16 +42,16 @@
    		 	update qna set step=step+1 where ref=#{ref} and step>#{step}
    		 </update>
    		 
-   		<select id="qnaSelect" parameterType="QnaDTO" resultType="QnaDTO">
+   		<select id="getOne" parameterType="QnaDTO" resultType="QnaDTO">
     		select * from qna where num= #{num} 
     	</select>
    		 
     
-    	<update id = "qnaUpdate" parameterType="QnaDTO">
+    	<update id = "setUpdate" parameterType="QnaDTO">
     		update qna set title=#{title}, contents=#{contents} where num=#{num}
     	</update>
 
-    	<delete id ="qnaDelete" parameterType="QnaDTO">
+    	<delete id ="setDelete" parameterType="QnaDTO">
     		delete qna where num=#{num}
     	</delete>  
     

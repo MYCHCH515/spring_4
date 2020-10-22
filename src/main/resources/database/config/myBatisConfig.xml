@@ -9,8 +9,8 @@
    		<typeAlias type="java.lang.Long" alias="Long"></typeAlias>
    		<typeAlias type="com.ch.s4.board.notice.NoticeDTO" alias="NoticeDTO"></typeAlias>
    		<typeAlias type="com.ch.s4.board.qna.QnaDTO" alias="QnaDTO"></typeAlias>
+   		<typeAlias type="com.ch.s4.util.Pager" alias="Pager"></typeAlias>
    	
-    
     </typeAliases>
     
     </configuration>
