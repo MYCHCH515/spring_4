@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ch.s4.board.BoardDTO;
 import com.ch.s4.util.Pager;
 
+import oracle.jdbc.proxy.annotation.Post;
+
 @Controller
 @RequestMapping(value="/notice/**")
 public class NoticeController {
@@ -78,6 +80,47 @@ public class NoticeController {
 			mv.addObject("path", "./noticeList");
 		}
 		return mv;
+	}
+	
+	@GetMapping("noticeDelete")
+	public ModelAndView setDelete(BoardDTO boardDTO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = noticeService.setDelete(boardDTO);
+		
+		String message="Delete Fail";
+		if(result>0) {
+			message = "Delete Success";
+		}
+	
+		mv.addObject("msg", message);
+		mv.addObject("path", "./noticeList");
+		
+		mv.setViewName("common/result");
+
+		return mv;	
+	}
+	
+	@GetMapping("noticeUpdate")
+	public ModelAndView setUpdate() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("board/boardWrite");
+		mv.addObject("board", "notice");
+		return mv;
+	}
+	
+	@PostMapping("noticeUpdate")
+	public ModelAndView setUpdate(BoardDTO boardDTO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = noticeService.setUpdate(boardDTO);
+		String message="Update Fail";
+		if(result>0) {
+			message = "Update Success";
+		}
+		mv.addObject("msg", message);
+		mv.addObject("path", "./noticeList");
+		mv.setViewName("common/result");
+
+		return mv;	
 	}
 	
 }

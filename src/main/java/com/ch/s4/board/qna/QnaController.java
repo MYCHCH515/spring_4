@@ -106,4 +106,22 @@ public class QnaController {
 		}
 		return mv;
 	}
+	
+	@GetMapping("qnaDelete")
+	public ModelAndView setDelete(BoardDTO boardDTO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = qnaService.setDelete(boardDTO);
+		
+		String message="Delete Fail";
+		if(result>0) {
+			message = "Delete Success";
+		}
+	
+		mv.addObject("msg", message);
+		mv.addObject("path", "./qnaList");
+		
+		mv.setViewName("common/result");
+
+		return mv;	
+	}
 }
