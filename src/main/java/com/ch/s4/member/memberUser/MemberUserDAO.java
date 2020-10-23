@@ -31,4 +31,9 @@ public class MemberUserDAO implements MemberDAO {
 		return sqlsession.delete(NAMESPACE+"setMemberDelete", memberDTO);
 	}
 
+	@Override
+	public int setMemberJoin(MemberDTO memberDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlsession.insert(NAMESPACE+"setMemberJoin", memberDTO);
+	}
 }

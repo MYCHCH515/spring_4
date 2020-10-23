@@ -21,7 +21,7 @@
     		</c:when>
     		
     		<c:otherwise> 	
-     			 <li><a href="${pageContext.request.contextPath}/member/memberJoin"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+     			 <li><a href="${pageContext.request.contextPath}/member/memberJoin"><span class="glyphicon glyphicon-user"></span> Join</a></li>
      			 <li><a href="${pageContext.request.contextPath}/member/memberLogin"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     		</c:otherwise>
     	</c:choose>

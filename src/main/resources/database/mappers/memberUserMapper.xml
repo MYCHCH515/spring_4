@@ -15,4 +15,8 @@
     	<delete id="setMemberDelete" parameterType="MemberDTO">
     		delete member where id=#{id}
     	</delete>
+    	
+    	<insert id="setMemberJoin" parameterType="MemberDTO">
+    		insert into member values (memseq.nextval, #{id}, #{pw}, #{name}, #{email})   
+    	</insert>
     </mapper>

@@ -6,4 +6,6 @@ public interface MemberDAO {
 	public int setMemberUpdate(MemberDTO memberDTO) throws Exception;
 	
 	public int setMemberDelete(MemberDTO memberDTO) throws Exception;
+	
+	public int setMemberJoin(MemberDTO memberDTO) throws Exception;
 }
