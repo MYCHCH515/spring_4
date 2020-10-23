@@ -1,5 +1,4 @@
 package com.ch.s4.board.notice;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,7 +102,7 @@ public class NoticeController {
 	@GetMapping("noticeUpdate")
 	public ModelAndView setUpdate() throws Exception{
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("board/boardWrite");
+		mv.setViewName("board/boardUpdate");
 		mv.addObject("board", "notice");
 		return mv;
 	}
