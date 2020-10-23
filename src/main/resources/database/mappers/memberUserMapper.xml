@@ -5,6 +5,14 @@
 
     <mapper namespace="com.ch.s4.member.memberUser.MemberUserDAO">
     	<select id="getMemberLogin" parameterType="MemberDTO" resultType="MemberUserDTO">
-    		select *from member where id=#{id} and pw=#{pw}
+    		select * from member where id=#{id} and pw=#{pw}
     	</select>
+    	
+    	<update id="setMemberUpdate" parameterType="MemberDTO">
+    		update member set name=#{name} ,email=#{email} where id=#{id}
+    	</update>
+    	
+    	<delete id="setMemberDelete" parameterType="MemberDTO">
+    		delete member where id=#{id}
+    	</delete>
     </mapper>

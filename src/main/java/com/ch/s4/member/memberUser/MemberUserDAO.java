@@ -20,5 +20,15 @@ public class MemberUserDAO implements MemberDAO {
 		// TODO Auto-generated method stub
 		return sqlsession.selectOne(NAMESPACE+"getMemberLogin", memberDTO);
 	}
+	@Override
+	public int setMemberUpdate(MemberDTO memberDTO) throws Exception{
+		return sqlsession.update(NAMESPACE+"setMemberUpdate", memberDTO);
+	}
+	
+	@Override
+	public int setMemberDelete(MemberDTO memberDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlsession.delete(NAMESPACE+"setMemberDelete", memberDTO);
+	}
 
 }
