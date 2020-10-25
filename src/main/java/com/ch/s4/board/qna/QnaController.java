@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -126,9 +127,11 @@ public class QnaController {
 	}
 	
 	@GetMapping("qnaUpdate")
-	public ModelAndView setUpdate() throws Exception{
-		ModelAndView mv = new ModelAndView();
+	public ModelAndView setUpdate(BoardDTO boardDTO, ModelAndView mv) throws Exception{
+		boardDTO = qnaService.getOne(boardDTO);
+		mv = new ModelAndView();
 		mv.setViewName("board/boardUpdate");
+		mv.addObject("dto", boardDTO);
 		mv.addObject("board", "qna");
 		return mv;
 	}

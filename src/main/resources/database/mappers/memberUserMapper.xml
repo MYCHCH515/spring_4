@@ -17,6 +17,6 @@
     	</delete>
     	
     	<insert id="setMemberJoin" parameterType="MemberDTO">
-    		insert into member values (memseq.nextval, #{id}, #{pw}, #{name}, #{email})   
+    		insert into member values(memseq.nextval, #{id}, #{pw}, #{name}, #{email,jdbcType=VARCHAR})   
     	</insert>
     </mapper>

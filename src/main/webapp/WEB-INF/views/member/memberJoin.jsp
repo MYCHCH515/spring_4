@@ -24,16 +24,16 @@
 	      <input type="password" class="form-control" id="pw" placeholder="Enter password" name="pw">
 	    </div>
 	     <div class="form-group">
-	      <label for="pw2">Password:</label>
-	      <input type="password" class="form-control" id="pw2" placeholder="Enter password" name="pw2">
+	      <label for="pw">Password:</label>
+	      <input type="password" class="form-control" id="pw" placeholder="Enter password" name="pw2">
 	    </div>
 	    <div class="form-group">
-	      <label for="id">Name:</label>
+	      <label for="name">Name:</label>
 	      <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
 	    </div>
 	    <div class="form-group">
-	      <label for="id">Email:</label>
-	      <input type="email" class="form-control" id="email" placeholder="Enter email" name="eamil">
+	      <label for="email">Email:</label>
+	      <input type="text" class="form-control" id="email" placeholder="Enter email" name="eamil">
 	    </div>
 	    <button type="submit" class="btn btn-default">Submit</button>
   </form>

@@ -23,7 +23,7 @@
     
      <div class="form-group">
       <label for="writer">Writer:</label>
-      <input type="text" class="form-control" id="writer" placeholder="Enter writer" name="writer" value="${dto.writer}">
+      <input type="text" class="form-control" id="writer" readonly="readonly" placeholder="Enter writer" name="writer" value="${dto.writer}">
     </div>
   
     <div class="form-group">

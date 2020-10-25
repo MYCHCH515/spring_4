@@ -100,9 +100,11 @@ public class NoticeController {
 	}
 	
 	@GetMapping("noticeUpdate")
-	public ModelAndView setUpdate() throws Exception{
-		ModelAndView mv = new ModelAndView();
+	public ModelAndView setUpdate(BoardDTO boardDTO, ModelAndView mv) throws Exception{
+		boardDTO = noticeService.getOne(boardDTO);
+		mv = new ModelAndView();
 		mv.setViewName("board/boardUpdate");
+		mv.addObject("dto", boardDTO);
 		mv.addObject("board", "notice");
 		return mv;
 	}

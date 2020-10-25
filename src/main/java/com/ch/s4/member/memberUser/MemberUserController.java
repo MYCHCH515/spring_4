@@ -27,15 +27,15 @@ public class MemberUserController {
 	@PostMapping("memberJoin")
 	public ModelAndView setMemberJoin(MemberDTO memberDTO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		memberUserService.setMemberJoin(memberDTO);
-//		String message="Join Fail";
-//		if(result>0) {
-//			message = "Join Success";
-//		}
-//		else {
-//			mv.setViewName("redirect:member/memberJoin");
-//		}
-//			
+		int result = memberUserService.setMemberJoin(memberDTO);
+		String message="Join Fail";
+		if(result>0) {
+		message = "Join Success";
+		}
+
+		mv.addObject("msg", message);
+		mv.setViewName("common/result");	
+		
 		mv.setViewName("redirect:../");
 
 		return mv;
