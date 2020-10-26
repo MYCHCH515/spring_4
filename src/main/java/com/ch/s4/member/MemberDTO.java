@@ -6,6 +6,7 @@ public class MemberDTO {
 	private String pw;
 	private String name;
 	private String email;
+	
 	public long getNum() {
 		return num;
 	}

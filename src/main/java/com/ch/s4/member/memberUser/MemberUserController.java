@@ -28,24 +28,23 @@ public class MemberUserController {
 	public ModelAndView setMemberJoin(MemberDTO memberDTO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		int result = memberUserService.setMemberJoin(memberDTO);
-		String message="Join Fail";
-		if(result>0) {
-		message = "Join Success";
-		}
-
-		mv.addObject("msg", message);
-		mv.setViewName("common/result");	
-		
+//		String message="Join Fail";
+//		if(result>0) {
+//		message = "Join Success";
+//		}
+//
+//		mv.addObject("msg", message);
+//		mv.setViewName("common/result");	
+//		
 		mv.setViewName("redirect:../");
 
 		return mv;
 	}
 	
 	@GetMapping("memberDelete")
-	public ModelAndView setMemberDelete(MemberDTO memberDTO, HttpSession session) throws Exception{
+	public ModelAndView setMemberDelete(HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		MemberDTO s = (MemberDTO)session.getAttribute("member");
-		memberDTO.setId(s.getId());
+		MemberDTO memberDTO= (MemberDTO)session.getAttribute("member");
 		int result = memberUserService.setMemberDelete(memberDTO);
 		session.invalidate();
 		mv.setViewName("redirect:../");
