@@ -43,9 +43,10 @@
 //****************DEL***********************
 	$("#result").on("click",".del", function(){
 		var num = $(this).attr("title");
-		$.post("./memoDelete",{num:num}, function(){
+		$.post("./memoDelete",{num:num}, function(data){
 			data=data.trim();
 			if(data>0){
+				alert("Delete Success");
 				getList();
 			}
 			else{
