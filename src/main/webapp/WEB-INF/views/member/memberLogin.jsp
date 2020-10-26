@@ -17,7 +17,7 @@
 	 <form action="./memberLogin" method="post">
 	    <div class="form-group">
 	      <label for="id">Id:</label>
-	      <input type="id" class="form-control" id="id" placeholder="Enter id" name="id">
+	      <input type="text" class="form-control" id="id" placeholder="Enter id" name="id">
 	    </div>
 	    <div class="form-group">
 	      <label for="pw">Password:</label>
