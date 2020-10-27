@@ -45,14 +45,14 @@
 	    <div class="form-group">
 	      <label for="name">Name:</label>
 	      <input type="text" class="form-control empty" id="name" placeholder="Enter name" name="name">
+	      <div class="emptyResult"></div>
 	    </div>
-	    <div class="emptyResult"></div>
 	    
-	    <div class="form-group">
+	   <div class="form-group">
 	      <label for="email">Email:</label>
-	      <input type="text" class="form-control empty" id="email" placeholder="Enter email" name="eamil">
+	      <input type="text" class="form-control empty" id="email" placeholder="Enter Email" name="email">
+	      <div class="emptyResult"></div>
 	    </div>
-	    <div class="emptyResult"></div>
 	  
 	  	<input type="button" value="Join" id="join" class="btn btn-default"> 
   </form>
@@ -122,17 +122,17 @@ $("#pw2").blur(function(){
 });
 
 //*******empty check**************
-function emptyCheck(){
-	emptyCheckResult=true;
-	$(".emptyResult").removeClass("Check1");
-	$(".emptyResult").html('');
-	$(".empty").each(function(){
-		var data = $(this).val();
-		if(data==''){
-			emptyCheckResult=false;
-			$(this).next().html("필수항목 입니다");
-			$(".emptyResult").addClass("Check1");
-		}
-	});
-}
+	function emptyCheck() {
+		emptyCheckResult=true;
+		$(".emptyResult").removeClass("Check1");
+		$(".emptyResult").html('');
+		$(".empty").each(function() {
+			var data = $(this).val();
+			if(data==''){
+				emptyCheckResult=false;
+				$(this).next().html("필수 항목입니다");
+				$(".emptyResult").addClass("Check1");
+			}
+		});
+	}
 </script>
