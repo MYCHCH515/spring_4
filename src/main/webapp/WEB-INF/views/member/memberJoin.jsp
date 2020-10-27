@@ -52,6 +52,21 @@
 
 <script type="text/javascript">
 
+
+$("#id").blur(function(){
+	var id = $("#id").val();
+	
+	$.get("./memberPage",{id:id},function(data){
+		if(id==member.id){
+			$("#idResult").val('중복된아이디입니다')
+		}
+		else{
+			$("#idResult").val('')
+		}
+	});
+});
+
+
 var id = document.getElementById("id");
 var pw = document.getElementById("pw");
 var pw2 = document.getElementById("pw2");
@@ -65,7 +80,74 @@ var emailResult = document.getElementById("emailResult");
 var sub = document.getElementById("sub");
 var check = document.getElementsByClassName("check");
 check = [false,false,false,false,false];
+
+
+
+$("#id").blur(function(){
+	var id = $("#id").val();
 	
+	$.get("./memberPage?id=id",function(data){
+		if(id==member.id){
+			$("#idResult").html('중복된아이디입니다')
+		}
+		else{
+			$("#idResult").val('')
+		}
+	});
+});
+
+
+$("#id").keyup(function(){
+	var id = $("#id").val();
+	
+	if(id.length>=5&&id.length<=10){
+		$("#idResult").html('')
+	}
+	else{
+		$("#idResult").html('5글자이상 10글자 이하로 입력하세요')
+	}
+});
+
+$("#pw").keyup(function(){
+	var pw = $("#pw").val();
+	
+	if(pw.length>=6&&pw.length<=14){
+		$("#pwResult").html('')
+	}
+	else{
+		$("#pwResult").html('6글자이상 14글자 이하로 입력하세요')
+	}
+});
+
+$("#p2").keyup(function(){
+	var pw = $("#pw").val();
+	var pw2 = $("#pw2").val();
+	
+	if(pw==pw2){
+		$("#pw2Result").style.color="blue";
+		$("#pw2Result").html('비밀번호가 일치합니다')
+	}
+	else{
+		$("#pw2Result").style.color="red";
+		$("#pw2Result").html('비밀번호가 일치하지않습니다')
+	}
+});
+
+/**
+pw2.addEventListener('keyup',function(){
+	
+	if(pw.value==pw2.value){
+		pwResult2.style.color="blue";
+		pwResult2.innerHTML="비밀번호가 일치합니다";
+		check[2] = true;
+	}
+	else {
+		pwResult2.style.color="red";
+		pwResult2.innerHTML="비밀번호가 일치하지않습니다";
+		check[2] = false;
+	}
+});
+
 id.addEventListener('keyup',function(){
 	var str =id.value;
 
@@ -89,7 +171,7 @@ pw.addEventListener('keyup',function(){
 		pwResult1.innerHTML="6글자이상 14글자 이하로 입력하세요";
 		check[1] = false;
 	}
-});
+}); **/
 
 pw2.addEventListener('keyup',function(){
 	
