@@ -48,10 +48,8 @@
 	   <div class="form-group">
 	      <label for="email">Email:</label>
 	      <input type="text" class="form-control empty" id="email" placeholder="Enter email" name="eamil">
-	      <input type="text" class="form-control empty" id="email" placeholder="Enter Email" name="email">
 	      <div class="emptyResult"></div>
 	    </div>
-
 
 	  	<input type="button" value="Join" id="join" class="btn btn-default"> 
   </form>
