@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		<!-- DB 연결 클래스 -->
+	<!-- DB 연결 클래스 -->
 	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
 		<property name="username" value="user01"></property>
 		<property name="password" value="user01"></property>
@@ -23,4 +23,15 @@
 	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"></constructor-arg>
 	</bean>	
+	
+	<!--  -->
+	<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+		<property name="defaultEncoding" value="UTF-8"></property>
+		
+		<!--파일 하나당 최대크기 제한  -->
+		<property name="maxUploadSizePerFile" value="10485760" ></property>
+		
+		<!--전체 파일의 최대 크기 제한 -->
+		<property name="maxUploadSize" value="104857600" ></property>
+	</bean>
 </beans>
