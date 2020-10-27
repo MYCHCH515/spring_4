@@ -72,26 +72,30 @@ $("#join").click(function(){
 $("#id").blur(function(){
 	idCheck=false;	
 	var id = $(this).val();	
-	if(id==''){
-		$("#idResult").html("Id를 입력하세요");
-		$("#idResult").removeClass("Check0").addClass("Check1");
-	}
-	else{
-		$.get("./memberIdCheck?id="+id,function(data){
-			//a사용가능, b사용불가
-			//true사용가능 false 사용불가
-			//0사용가능 1사용불가	
-			data=data.trim()
-			var str = "중복된 ID 입니다";	
+	if(id != ''){
+		$.ajax({
+			url : "./memberIdCheck",
+			type : "GET",
+			data : {id:id},
+			success: function(data) {
+				data=data.trim();
+				var str = "중복된 ID 입니다";
+				
 				$("#idResult").removeClass("Check0").addClass("Check1");
 				if(data==0){
-					str="사용가능한 ID 입니다"
+					str = "사용 가능한 ID 입니다"
 					$("#idResult").removeClass("Check1").addClass("Check0");
 					idCheck=true;
 				}
-				$("#idResult").html(str);	
+				$("#idResult").html(str);
+			}		
 		});
+		
+	}else {
+		$("#idResult").html("Id는 필수 항목입니다");
+		$("#idResult").removeClass("Check0").addClass("Check1");
 	}
+	
 });
 //**********pw check************
 $("#pw2").blur(function(){
