@@ -36,4 +36,10 @@ public class MemberUserDAO implements MemberDAO {
 		// TODO Auto-generated method stub
 		return sqlsession.insert(NAMESPACE+"setMemberJoin", memberDTO);
 	}
+	
+	@Override
+	public MemberDTO getMemberIdCheck(MemberDTO memberDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne(NAMESPACE+"getMemberIdCheck", memberDTO);
+	}
 }
