@@ -17,7 +17,7 @@
     	</delete>
     	
     	<insert id="setMemberJoin" parameterType="MemberDTO">
-    		insert into member values(memseq.nextval, #{id}, #{pw}, #{name}, #{email,jdbcType=VARCHAR})   
+    		insert into member values(member_seq.nextval, #{id}, #{pw}, #{name}, #{email,jdbcType=VARCHAR})   
     	</insert>
     	
     	<select id="getMemberIdCheck" parameterType="MemberDTO" resultType="MemberDTO">
