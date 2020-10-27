@@ -9,10 +9,10 @@
 <title>Insert title here</title>
 <c:import url="../template/bootstrap.jsp"></c:import>
 <style type="text/css">
-	.idCheck0{
+	.Check0{
 		color: blue;
 	}
-	.idCheck1{
+	.Check1{
 		color: red;
 	}
 
@@ -24,7 +24,7 @@
 
 <div class="container">
 	<h3>Member Join Page</h3>
-	 <form action="./memberJoin" method="post">
+	 <form action="./memberJoin" method="post" id="frm">
 	    <div class="form-group">
 	      <label for="id">Id:</label>
 	      <input type="text" class="form-control" id="id" placeholder="Enter id" name="id" class="check">
@@ -35,49 +35,104 @@
 	      <label for="pw">Password:</label>
 	      <input type="password" class="form-control" id="pw" placeholder="Enter password" name="pw" class="check">
 	    </div>
-	    <div id="pwResult1"></div>
 	    
 	     <div class="form-group">
 	      <label for="pw">Password Check:</label>
 	      <input type="password" class="form-control" id="pw2" placeholder="Enter password" name="pw2" class="check">
 	    </div>
-	    <div id="pwResult2"></div>
+	    <div id="pwResult"></div>
 	    
 	    <div class="form-group">
 	      <label for="name">Name:</label>
-	      <input type="text" class="form-control" id="na" placeholder="Enter name" name="name" class="check">
+	      <input type="text" class="form-control empty" id="name" placeholder="Enter name" name="name" class="check">
 	    </div>
-	    <div id="nameResult"></div>
+	    <div class="emptyResult"></div>
 	    
 	    <div class="form-group">
 	      <label for="email">Email:</label>
-	      <input type="text" class="form-control" id="email" placeholder="Enter email" name="eamil" class="check">
+	      <input type="text" class="form-control empty" id="email" placeholder="Enter email" name="eamil" class="check">
 	    </div>
-	    <div id="emailResult"></div>
+	    <div class="emptyResult"></div>
 	  
-	    <button type="submit" id="sub" class="btn btn-default">Submit</button>
- 		
+	  	<input type="button" value="Join" id="join" class="btn btn-default"> 
   </form>
 </div>
 
 <script type="text/javascript">
+var idCheck=false;
+var pwCheck=false;
+var emptyCheckResult = true;
 
-$("#id").blur(function(){
-	var id = $(this).val();
-	
-	$.get("./memberIdCheck?id="+id,function(data){
-		//a사용가능, b사용불가
-		//true사용가능 false 사용불가
-		//0사용가능 1사용불가
-			
-		data=data.trim()
-		var str = "중복된 ID 입니다"
-			$("#idResult").addClass("idCheck1");
-			if(data==0){
-				str="사용가능한 ID 입니다"
-				$("#idResult").removeClass("idCheck1").addClass("idCheck0");
-			}
-			$("#idResult").html(str);	
-	});
+//**********join btn**********
+$("#join").click(function(){
+	emptyCheck();
+	if(idCheck && pwCheck && emptyCheckResult){
+		$("#frm").submit();
+	}
+//	else{
+//		alert("no");
+//	}
 });
+
+//**********id check**************
+$("#id").blur(function(){
+	idCheck=false;	
+	var id = $(this).val();	
+	if(id==''){
+		$("#idResult").html("Id를 입력하세요");
+		$("#idResult").removeClass("Check0").addClass("Check1");
+	}
+	else{
+		$.get("./memberIdCheck?id="+id,function(data){
+			//a사용가능, b사용불가
+			//true사용가능 false 사용불가
+			//0사용가능 1사용불가	
+			data=data.trim()
+			var str = "중복된 ID 입니다";	
+				$("#idResult").removeClass("Check0").addClass("Check1");
+				if(data==0){
+					str="사용가능한 ID 입니다"
+					$("#idResult").removeClass("Check1").addClass("Check0");
+					idCheck=true;
+				}
+				$("#idResult").html(str);	
+		});
+	}
+});
+
+//**********pw check************
+
+$("#pw2").blur(function(){
+	var pw = $("#pw").val();
+	var pw2 = $(this).val();
+	pwCheck=false;
+	
+	if(pw2==''){
+		$("#pwResult").html("Password를 입력하세요");
+	 	$("#pwResult").removeClass("Check0").addClass("Check1");
+	 	
+	}else if(pw==pw2){
+		$("#pwResult").html("Password가 일치합니다");
+		$("#pwResult").removeClass("Check1").addClass("Check0");
+		pwCheck=true;
+	}else{
+		$("#pwResult").html("Password가 일치하지 않습니다");
+	 	$("#pwResult").removeClass("Check0").addClass("Check1");
+	}	
+});
+
+//*******empty check**************
+function emptyCheck(){
+	emptyCheckResult=true;
+	$(".emptyResult").removeClass("Check1");
+	$(".emptyResult").html('');
+	$(".empty").each(function(){
+		var data = $(this).val();
+		if(data==''){
+			emptyCheckResult=false;
+			$(this).next().html("필수항목 입니다");
+			$(".emptyResult").addClass("Check1");
+		}
+	});
+}
 </script>
