@@ -15,7 +15,7 @@ public class QnaServiceTest {
 	@Autowired
 	private QnaService qnaService;
 
-	@Test
+	//@Test
 	public void getListTest() throws Exception{
 		Pager pager = new Pager();
 		

@@ -13,7 +13,7 @@ import com.ch.s4.util.Pager;
 
 public class NoticeDAOTest extends MyTestCase{
 	
-	@Autowired
+	//@Autowired
 	private NoticeDAO noticeDAO;
 	
 	//@Test

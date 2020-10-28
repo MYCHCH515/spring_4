@@ -16,7 +16,7 @@ public class NoticeServiceTest extends MyTestCase{
 	@Autowired
 	private NoticeService noticeService;
 	
-	@Test
+	//@Test
 	public void getListTest() throws Exception{
 		
 		Pager pager = new Pager();
