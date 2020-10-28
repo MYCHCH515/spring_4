@@ -15,5 +15,6 @@ public class MemberFileController {
 	
 	public void setInsert(MemberFileDTO memberFileDTO) throws Exception{
 		int result = memberFileService.setInsert(memberFileDTO);
+		
 	}
 }
