@@ -27,7 +27,7 @@ public class QnaService implements BoardService {
 	}
 
 	@Override
-	public int setInsert(BoardDTO boardDTO, MultipartFile files, HttpSession session) throws Exception {
+	public int setInsert(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return qnaDAO.setInsert(boardDTO);
 	}

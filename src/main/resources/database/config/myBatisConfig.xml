@@ -5,7 +5,6 @@
     
     <configuration>
     <typeAliases>
-    
    		<typeAlias type="java.lang.Long" alias="Long"/>
    		<typeAlias type="com.ch.s4.board.notice.NoticeDTO" alias="NoticeDTO"></typeAlias>
    		<typeAlias type="com.ch.s4.board.qna.QnaDTO" alias="QnaDTO"></typeAlias>
@@ -14,6 +13,7 @@
    		<typeAlias type="com.ch.s4.member.memberUser.MemberUserDTO" alias="MemberUserDTO"></typeAlias>
    		<typeAlias type="com.ch.s4.member.MemberDTO" alias="MemberDTO"></typeAlias>
    		<typeAlias type="com.ch.s4.board.memo.MemoDTO" alias="MemoDTO"/>
+   		<typeAlias type="com.ch.s4.member.memberFile.MemberFileDTO" alias="MemberFileDTO"></typeAlias>
     </typeAliases>
     
     </configuration>

@@ -34,8 +34,8 @@ public class NoticeController {
 	}
 	
 	@PostMapping("noticeWrite")
-	public ModelAndView setInsert(BoardDTO boardDTO, MultipartFile files, HttpSession session) throws Exception {
-		int result = noticeService.setInsert(boardDTO, files, session);
+	public ModelAndView setInsert(BoardDTO boardDTO) throws Exception {
+		int result = noticeService.setInsert(boardDTO);
 		System.out.println("RESULT: " + result);
 		
 		String message="Write Fail";

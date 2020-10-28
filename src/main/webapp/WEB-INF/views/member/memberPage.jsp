@@ -27,6 +27,11 @@
 		</tr>
 	</table>
 	
+	<!-- 회원가입할때 올린 사진들 나오게 해줌 -->
+	<div>
+		<img alt="" src="../resources/upload/member/..나머지주소db에서 가져오기">
+	</div>
+	
 	<a href="./memberUpdate" class="btn btn-primary">Update</a>
 	<a href="./memberDelete" class="btn btn-danger">Delete</a>
 </div>

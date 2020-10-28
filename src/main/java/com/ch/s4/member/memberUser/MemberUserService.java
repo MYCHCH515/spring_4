@@ -13,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ch.s4.member.MemberDTO;
 import com.ch.s4.member.MemberService;
+import com.ch.s4.member.memberFile.MemberFileDAO;
+import com.ch.s4.member.memberFile.MemberFileDTO;
 import com.ch.s4.util.FileSaver;
 
 @Service
@@ -20,6 +22,9 @@ public class MemberUserService implements MemberService {
 
 	@Autowired
 	private MemberUserDAO memberUserDAO;
+	
+	@Autowired
+	private MemberFileDAO memberFileDAO;
 	
 	@Autowired
 	private FileSaver fileSaver;
@@ -49,9 +54,20 @@ public class MemberUserService implements MemberService {
 		System.out.println(path);
 		File file = new File(path);
 		
-		fileSaver.saveCopy(file, photo);
+		String fileName = fileSaver.saveCopy(file, photo);
 		
-		return 0; //memberUserDAO.setMemberJoin(memberDTO);
+		//memberFile Insert
+		MemberFileDTO memberFileDTO = new MemberFileDTO();
+		memberFileDTO.setId(memberDTO.getId());
+		memberFileDTO.setFileName(fileName);
+		memberFileDTO.setOriName(photo.getOriginalFilename());
+		
+		//순서 중요! 멤버 먼저 만들고 파일 집어넣기 
+		int result = memberUserDAO.setMemberJoin(memberDTO);
+		
+		result = memberFileDAO.setInsert(memberFileDTO);
+		
+		return result;
 	}
 	
 	@Override
