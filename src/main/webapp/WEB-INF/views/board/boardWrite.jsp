@@ -8,6 +8,15 @@
 <title>Insert title here</title>
 
 <c:import url="../template/bootstrap.jsp"></c:import>
+
+<style type="text/css">
+.filedel{
+	color: red;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+</style>
 </head>
 <body>
 
@@ -32,16 +41,41 @@
         <textarea class="form-control" rows="10" id="contents" name="contents"></textarea>
     </div>
     
-     <div class="form-group">
-      <label for="files">file:</label>
-      <input type="file" class="form-control" id="file" name="files">
-    </div>
- 
+    <div class="form-group">
+ 	<input type="button" value="FileAdd" class="btn btn-info" id="fileAdd">
+ 	</div>
+ 	
+ 	<div id="result"></div>
+ 	
  	<input type="button" class="btn btn-primary" value="Write" id="btn">
     <button type="submit" class="btn btn-default">Write</button>
   </form>
 </div>
+
 <script type="text/javascript" src="../resources/js/boardWrite.js"></script>
+
+<script type="text/javascript">
+	var count =0;
+	
+	$("#fileAdd").click(function(){
+		var str=  "<div class='input-group'><input id='files' type='file' class='form-control' name='files'> <span class='input-group-addon filedel'>DEL</span>"
+		
+		if(count<5){
+			$("#result").append(str);
+			count ++;
+		}
+		else{
+			alert("첨부파일은 5개까지");
+		}
+	});
+	
+	$("#result").on("click",".filedel", function(){
+		$(this).parent(".input-group").remove();
+		count--;
+	});
+	
+	
+</script>
 
 
 </body>

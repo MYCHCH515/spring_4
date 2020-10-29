@@ -34,7 +34,12 @@ public class NoticeController {
 	}
 	
 	@PostMapping("noticeWrite")
-	public ModelAndView setInsert(BoardDTO boardDTO) throws Exception {
+	public ModelAndView setInsert(BoardDTO boardDTO, MultipartFile [] files) throws Exception {
+		
+		for(int i=0;i<files.length;i++) {
+			System.out.println(files[i].getOriginalFilename());
+		}
+
 		int result = noticeService.setInsert(boardDTO);
 		System.out.println("RESULT: " + result);
 		

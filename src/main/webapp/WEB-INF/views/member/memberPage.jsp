@@ -31,7 +31,7 @@
 	<!-- 회원가입할때 올린 사진들 나오게 해줌 -->
 	<div>
 		<span>이미지</span>
-		<img alt="" src="../resources/upload/member/${file.fileName}">
+		<img alt="" src="../resources/upload/member/${member.memberFileDTO.fileName}">
 	</div>
 	
 	<a href="./memberUpdate" class="btn btn-primary">Update</a>

@@ -34,6 +34,7 @@ public class MemberUserDAO implements MemberDAO {
 	@Override
 	public int setMemberJoin(MemberDTO memberDTO) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println("dao:"+memberDTO.getEmail());
 		return sqlsession.insert(NAMESPACE+"setMemberJoin", memberDTO);
 	}
 	

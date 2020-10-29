@@ -65,7 +65,7 @@ public class MemberUserService implements MemberService {
 			memberFileDTO.setId(memberDTO.getId());
 			memberFileDTO.setFileName(fileName);
 			memberFileDTO.setOriName(photo.getOriginalFilename());
-			
+			System.out.println("ser:"+memberDTO.getEmail());
 			System.out.println(fileName);
 			result = memberFileDAO.setInsert(memberFileDTO);
 		}
@@ -78,8 +78,8 @@ public class MemberUserService implements MemberService {
 		return memberUserDAO.getMemberIdCheck(memberDTO);
 	}
 	
-	public MemberFileDTO getOne(MemberDTO memberDTO) throws Exception{
-		return memberFileDAO.getOne(memberDTO);
-	}
+//	public MemberFileDTO getOne(MemberDTO memberDTO) throws Exception{
+//		return memberFileDAO.getOne(memberDTO);
+//	}
 
 }

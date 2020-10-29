@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ch.s4.member.MemberDTO;
 import com.ch.s4.member.memberFile.MemberFileDTO;
-import com.ch.s4.member.memberFile.MemberFileService;
 
 @Controller
 @RequestMapping(value="/member/**")
@@ -50,6 +49,7 @@ public class MemberUserController {
 		System.out.println(photo.getName());
 		System.out.println(photo.getSize());
 		System.out.println(photo.getContentType());
+		System.out.println(memberDTO.getEmail());
 		
 		int result = memberUserService.setMemberJoin(memberDTO, photo, session);
 		mv.setViewName("redirect:../");
@@ -95,11 +95,11 @@ public class MemberUserController {
 	//멤버페이지 넘길때 멤버파일 디티오 객체도 파라미터로 넘겨주기 
 	//컨트롤러에서 디비에서 가져오기 
 	@GetMapping("memberPage")
-	public ModelAndView getMemberPage(HttpSession session) throws Exception{
+	public ModelAndView getMemberPage() throws Exception{
 		ModelAndView mv = new ModelAndView();
-		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
-		MemberFileDTO memberFileDTO = memberUserService.getOne(memberDTO);
-		mv.addObject("file", memberFileDTO);
+//		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+//		MemberFileDTO memberFileDTO = memberUserService.getOne(memberDTO);
+//		mv.addObject("file", memberFileDTO);
 		mv.setViewName("member/memberPage");
 		return mv;
 	}
