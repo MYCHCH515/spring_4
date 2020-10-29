@@ -11,13 +11,15 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ch.s4.member.MemberDTO;
+import com.ch.s4.member.memberFile.MemberFileDTO;
+import com.ch.s4.member.memberFile.MemberFileService;
 
 @Controller
 @RequestMapping(value="/member/**")
 public class MemberUserController {
 	@Autowired
 	private MemberUserService memberUserService;
-	
+		
 	@GetMapping("memberIdCheck")
 	public ModelAndView getMemberIdCheck(MemberDTO memberDTO) throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -50,7 +52,6 @@ public class MemberUserController {
 		System.out.println(photo.getContentType());
 		
 		int result = memberUserService.setMemberJoin(memberDTO, photo, session);
-
 		mv.setViewName("redirect:../");
 
 		return mv;
@@ -91,9 +92,14 @@ public class MemberUserController {
 		return mv;
 	}
 	
+	//멤버페이지 넘길때 멤버파일 디티오 객체도 파라미터로 넘겨주기 
+	//컨트롤러에서 디비에서 가져오기 
 	@GetMapping("memberPage")
-	public ModelAndView getMemberPage() throws Exception{
+	public ModelAndView getMemberPage(HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		MemberFileDTO memberFileDTO = memberUserService.getOne(memberDTO);
+		mv.addObject("file", memberFileDTO);
 		mv.setViewName("member/memberPage");
 		return mv;
 	}
@@ -127,6 +133,7 @@ public class MemberUserController {
 		if(memberDTO != null) {
 			//index 페이지로 이동
 			//redirect
+			//session에 member정보 저장해줌 
 			session.setAttribute("member", memberDTO);
 			mv.addObject("member", memberDTO);
 			mv.setViewName("redirect:../");

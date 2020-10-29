@@ -1,3 +1,4 @@
+<%@page import="com.ch.s4.member.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -29,7 +30,8 @@
 	
 	<!-- 회원가입할때 올린 사진들 나오게 해줌 -->
 	<div>
-		<img alt="" src="../resources/upload/member/..나머지주소db에서 가져오기">
+		<span>이미지</span>
+		<img alt="" src="../resources/upload/member/${file.fileName}">
 	</div>
 	
 	<a href="./memberUpdate" class="btn btn-primary">Update</a>
