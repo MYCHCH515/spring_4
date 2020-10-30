@@ -92,6 +92,6 @@
 </c:choose>
  
 </div>
-
+	<a href="./${board}Write" class="btn btn-danger">Write</a>
 </body>
 </html>

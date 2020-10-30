@@ -19,6 +19,13 @@
  	 <h3>Title : ${dto.title}</h3>
  	 <h3>Writer: ${dto.writer}</h3>
  	 <h3>Contents: ${dto.contents}</h3>
+ 	 
+ 	 <c:forEach items="${dto.boardFileDTOs}" var="file">
+ 	 	<h3>${file.fileName}</h3>
+ 	 	<h3>${file.oriName}</h3>
+ 	 	<hr>
+ 	 </c:forEach>
+ 
  	 <input type="button" title="${dto.num}" value = "Delete" class="btn btn-warning" id="del">
  	 <input type="button" title="${dto.num}" value="Update" class="btn btn-primary" id="upd">
  	 

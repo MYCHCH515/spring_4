@@ -59,7 +59,7 @@ public class QnaController {
 	
 	@PostMapping("qnaWrite")
 	public ModelAndView setInsert(BoardDTO boardDTO) throws Exception {
-		int result = qnaService.setInsert(boardDTO);
+		int result = qnaService.setInsert(boardDTO, null, null);
 		System.out.println("RESULT: " + result);
 		
 		String message="Write Fail";

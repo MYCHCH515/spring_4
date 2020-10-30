@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ch.s4.board.BoardDTO;
 import com.ch.s4.board.BoardService;
+import com.ch.s4.board.file.BoardFileDTO;
 import com.ch.s4.util.FileSaver;
 import com.ch.s4.util.Pager;
 
@@ -27,13 +28,37 @@ public class NoticeService implements BoardService {
 	private FileSaver fileSaver;
 	
 	@Override
-	public int setInsert(BoardDTO boardDTO) throws Exception {
-//		String path = session.getServletContext().getRealPath("/resources/upload/notice");
-//		System.out.println(path);
-//		File file = new File(path);
-//		fileSaver.saveTransfer(file, files);
-//	
-		return 0; //noticeDAO.setInsert(boardDTO);
+	public int setInsert(BoardDTO boardDTO, MultipartFile[] files, HttpSession session) throws Exception {
+		// TODO Auto-generated method stub
+		//파일을 HDD에 저장 
+		String path = session.getServletContext().getRealPath("/resource/upload/notice");
+		File file = new File(path);
+		System.out.println(path);
+		
+		//---sequence
+		//boardDTO.setNum(noticeDAO.getNum());
+		
+		//---Notice Insert 
+		//지금 boardDTO 에 NUM은 0임 insert를 해야 글번호가 seq통해 생성됨
+		int result = noticeDAO.setInsert(boardDTO);
+		
+		//---NoticeFile Insert
+		
+		for (MultipartFile multipartFile: files) { //files에서 multipartfile 타입의 객체들 꺼냄
+			if(multipartFile.getSize() !=0) {
+				String fileName = fileSaver.saveCopy(file, multipartFile);	
+	
+				BoardFileDTO boardFileDTO = new BoardFileDTO();
+				boardFileDTO.setFileName(fileName);
+				boardFileDTO.setOriName(multipartFile.getOriginalFilename());
+				boardFileDTO.setNum(boardDTO.getNum());
+				
+				noticeDAO.setInsertFile(boardFileDTO);
+				}
+			}
+		
+		//------------
+		return result;
 	}
 
 	@Override
