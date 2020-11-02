@@ -33,6 +33,8 @@ public class MemberUserService implements MemberService {
 	@Override
 	public MemberDTO getMemberLogin(MemberDTO memberDTO) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println(memberDTO.getId());
+		System.out.println(memberDTO.getPw());
 		return memberUserDAO.getMemberLogin(memberDTO);
 	}
 	@Override

@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../template/bootstrap.jsp"></c:import>
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 </head>
 <body>
 
@@ -28,7 +31,7 @@
   
     <div class="form-group">
       <label for="contents">Contents:</label>
-        <textarea class="form-control" rows="10" id="contents" name="contents">${dto.contents}</textarea>
+        <textarea class="form-control" id="contents" name="contents">${dto.contents}</textarea>
     </div>
  
  	<input type="button" class="btn btn-primary" value="Update" id="btn">
@@ -36,6 +39,10 @@
   </form>
 </div>
 <script type="text/javascript" src="../resources/js/boardWrite.js"></script>
-
+<script type="text/javascript">
+$('#contents').summernote({
+	 height:300
+});
+</script>
 </body>
 </html>

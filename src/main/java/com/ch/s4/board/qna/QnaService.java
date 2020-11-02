@@ -26,6 +26,14 @@ public class QnaService implements BoardService {
 	@Autowired
 	private FileSaver fileSaver;
 	
+	public String summernote(MultipartFile file, HttpSession session) throws Exception{
+		String path = session.getServletContext().getRealPath("/resources/upload/qna");
+		System.out.println(path);
+		File dest = new File(path);
+		String fileName = fileSaver.saveCopy(dest, file);
+		return "fileName";
+	}
+	
 	public int setReply(BoardDTO boardDTO) throws Exception{
 		int result = qnaDAO.setReplyUpdate(boardDTO);
 		result = qnaDAO.setReply(boardDTO);

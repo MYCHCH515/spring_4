@@ -33,12 +33,13 @@
     		insert into qnaFile values(qna_seq.nextval, #{num}, #{fileName}, #{oriName})
     	</insert>
     	
-    	 <insert id="setInsert" parameterType="QnaDTO">
-    	 	<selectKey keyProperty="num" resultType="long" order="BEFORE"> 
-    	 		select qna_seq.nextval from dual
-    	 	</selectKey>
-   		 	insert into qna values(#{num}, #{title}, #{writer}, #{contents}, sysdate, 0, qna_seq.currval, 0, 0)
-   		 </insert>
+    	<insert id="setInsert" parameterType="QnaDTO">
+			<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+				select qna_seq.nextval from dual
+			</selectKey>
+				insert into qna values(#{num}
+				, #{title}, #{writer}, #{contents}, sysdate, 0, qna_seq.currval,0,0)
+		</insert>
    		 
    		 <insert id="setReply" parameterType="QnaDTO">
    		 	insert into qna values (qna_seq.nextval

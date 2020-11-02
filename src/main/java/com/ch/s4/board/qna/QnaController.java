@@ -25,6 +25,21 @@ public class QnaController {
 	@Autowired
 	private QnaService qnaService;
 	
+	@PostMapping("summernote")
+	public ModelAndView summernote(MultipartFile file, HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		String fileName = qnaService.summernote(file, session);
+		
+		System.out.println(fileName);
+	
+		mv.addObject("msg", fileName);
+		mv.setViewName("common/ajaxResult");
+	
+		return mv;
+	}
+	
+	
 	@GetMapping("fileDown")
 	public ModelAndView fileDown(BoardFileDTO boardFileDTO) throws Exception{
 		ModelAndView mv = new ModelAndView();

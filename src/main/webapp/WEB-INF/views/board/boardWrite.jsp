@@ -8,15 +8,17 @@
 <title>Insert title here</title>
 
 <c:import url="../template/bootstrap.jsp"></c:import>
-
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <style type="text/css">
 .filedel{
 	color: red;
 	cursor: pointer;
 	font-weight: bold;
 }
-
 </style>
+
 </head>
 <body>
 
@@ -38,7 +40,7 @@
   
     <div class="form-group">
       <label for="contents">Contents:</label>
-        <textarea class="form-control" rows="10" id="contents" name="contents"></textarea>
+        <textarea class="form-control" id="contents" name="contents"></textarea>
     </div>
     
     <div class="form-group">
@@ -56,6 +58,34 @@
 
 <script type="text/javascript">
 	var count =0;
+	
+	 $('#contents').summernote({
+		 height:300,
+		 callbacks :{
+			 	onImageUplaod: function(files, editor){
+			 		var formData = new FormData(); //가상의 form태그를 하나 더 만들었다고 생각
+			 		formData.append('file', files[0]); //파라미터 이름이 file 
+			 		
+			 		$.ajax({
+			 			type:"POST",
+			 			url:"./summernote",
+			 			data:formData,
+			 			enctype:"multipart/form-data",
+			 			cache:false,
+			 			contentType:false,
+			 			processData:false,
+			 			success:function(data){
+			 				alert(data);
+			 			}
+			 		})
+			 }
+		 }
+	});
+	 
+	 $('#btn').click(function(){
+	 	 var contents = $('#contents').summernote('code');
+	 	 alert(contents);
+	 })
 	
 	$("#fileAdd").click(function(){
 		var str=  "<div class='input-group'><input id='files' type='file' class='form-control' name='files'> <span class='input-group-addon filedel'>DEL</span>"

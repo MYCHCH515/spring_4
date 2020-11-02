@@ -39,7 +39,7 @@ public class FileDown extends AbstractView{
 		String downName = URLEncoder.encode(boardFileDTO.getOriName(), "UTF-8");
 		
 		//header설정
-		response.setHeader("Content-Disposition", "attachment:fileName=\""+downName+"\"");
+		response.setHeader("Content-Disposition", "attachment;fileName=\""+downName+"\"");
 		response.setHeader("Content=Transfer-Encoding", "binary");
 		
 		//Client 전송
@@ -48,6 +48,7 @@ public class FileDown extends AbstractView{
 		
 		FileCopyUtils.copy(fi, os);
 		os.close();
+		fi.close();
 	}
 	
 }

@@ -24,7 +24,7 @@
     	</resultMap>
     
     	<select id="getMemberLogin" parameterType="MemberDTO" resultMap="getMemberLoginResult">
-    		select M.*, MF.fileName, MF.oriName from member M inner join memberFile MF on (M.id = MF.id) where M.id=#{id} and M.pw = #{pw}
+    		select M.*, MF.* from member M inner join memberFile MF on (M.id = MF.id) where M.id=#{id} and M.pw = #{pw}
     	</select>
     	
     	<update id="setMemberUpdate" parameterType="MemberDTO">
