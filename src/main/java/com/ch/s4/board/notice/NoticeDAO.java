@@ -1,11 +1,11 @@
 package com.ch.s4.board.notice;
 
 import java.util.List;
-
+import javax.inject.Named;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
+import org.springframework.beans.factory.annotation.Qualifier;
 import com.ch.s4.board.BoardDAO;
 import com.ch.s4.board.BoardDTO;
 import com.ch.s4.board.file.BoardFileDTO;

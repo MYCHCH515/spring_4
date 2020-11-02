@@ -62,23 +62,41 @@
 	 $('#contents').summernote({
 		 height:300,
 		 callbacks :{
-			 	onImageUplaod: function(files, editor){
+			 	onImageUplaod: function(files, editor, welEditable){
 			 		var formData = new FormData(); //가상의 form태그를 하나 더 만들었다고 생각
 			 		formData.append('file', files[0]); //파라미터 이름이 file 
 			 		
 			 		$.ajax({
+			 			data: formData,
 			 			type:"POST",
-			 			url:"./summernote",
-			 			data:formData,
-			 			enctype:"multipart/form-data",
+			 			url:'./summernote',
 			 			cache:false,
 			 			contentType:false,
+			 			enctype:'multipart/form-data',
 			 			processData:false,
 			 			success:function(data){
-			 				alert(data);
+			 				data = data.trim();
+			 				$("#contents").summernote('editor.insertImage', data);
 			 			}
 			 		})
-			 }
+			 }, //upload End
+		 
+				 onMediaDelete:function(files){
+					 var fileName = $(files[0]).attr("src");
+				 	//fileName에서 파일명만 구해오기
+					 fileName = fileName.substring(fileName.lastIndexOf("\\")+1);
+				 	
+				 	$.ajax({
+				 		type:"POST",
+				 		url: "./summernoteDelete",
+				 		data: {
+				 			file:fileName
+				 		},
+				 		success: function(data){
+				 			alert(data);
+				 		}
+				 	})  
+			 } 
 		 }
 	});
 	 
@@ -88,7 +106,7 @@
 	 })
 	
 	$("#fileAdd").click(function(){
-		var str=  "<div class='input-group'><input id='files' type='file' class='form-control' name='files'> <span class='input-group-addon filedel'>DEL</span>"
+		var str= "<div class='input-group'><input id='files' type='file' class='form-control' name='files'> <span class='input-group-addon filedel'>DEL</span>"
 		
 		if(count<5){
 			$("#result").append(str);

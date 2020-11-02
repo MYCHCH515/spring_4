@@ -9,11 +9,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.servlet.view.AbstractView;
 
 import com.ch.s4.board.file.BoardFileDTO;
 
+@Component
 public class FileDown extends AbstractView{
 	
 	@Override
@@ -40,7 +42,7 @@ public class FileDown extends AbstractView{
 		
 		//header설정
 		response.setHeader("Content-Disposition", "attachment;fileName=\""+downName+"\"");
-		response.setHeader("Content=Transfer-Encoding", "binary");
+		response.setHeader("Content-Transfer-Encoding", "binary");
 		
 		//Client 전송
 		FileInputStream fi = new FileInputStream(file);

@@ -27,8 +27,6 @@
 	
 	</beans:bean>
 	
-	<beans:bean class="com.ch.s4.util.FileDown" id="fileDown"></beans:bean>
-	
 	<context:component-scan base-package="com.ch.s4" />
 	
 	
