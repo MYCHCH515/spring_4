@@ -31,7 +31,7 @@ public class NoticeService implements BoardService {
 	public int setInsert(BoardDTO boardDTO, MultipartFile[] files, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
 		//파일을 HDD에 저장 
-		String path = session.getServletContext().getRealPath("/resource/upload/notice");
+		String path = session.getServletContext().getRealPath("/resources/upload/notice");
 		File file = new File(path);
 		System.out.println(path);
 		
