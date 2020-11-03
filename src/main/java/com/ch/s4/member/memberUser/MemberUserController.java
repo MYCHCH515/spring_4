@@ -14,19 +14,20 @@ import com.ch.s4.member.MemberDTO;
 import com.ch.s4.member.memberFile.MemberFileDTO;
 
 @Controller
-@RequestMapping(value="/member/**")
+@RequestMapping("/member/**")
 public class MemberUserController {
 	@Autowired
 	private MemberUserService memberUserService;
-		
+	
+	//idcheck
 	@GetMapping("memberIdCheck")
-	public ModelAndView getMemberIdCheck(MemberDTO memberDTO) throws Exception{
+	public ModelAndView getMemberIdCheck(MemberDTO memberDTO)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		memberDTO = memberUserService.getMemberIdCheck(memberDTO);
 		
-		int result = 1; //중복
-		if(memberDTO==null) {
-			result = 0;
+		int result=1; //중복
+		if(memberDTO == null) {
+			result=0;
 		}
 		
 		mv.addObject("msg", result);
@@ -34,68 +35,71 @@ public class MemberUserController {
 		return mv;
 	}
 	
+	//join
 	@GetMapping("memberJoin")
-	public ModelAndView setMemberJoin() throws Exception{
+	public ModelAndView setMemberJoin()throws Exception{
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("member/memberJoin");
 		return mv;
 	}
 	
 	@PostMapping("memberJoin")
-	public ModelAndView setMemberJoin(MemberDTO memberDTO, MultipartFile photo, HttpSession session) throws Exception{
+	public ModelAndView setMemberJoin(MemberDTO memberDTO, MultipartFile photo, HttpSession session)throws Exception{
 		ModelAndView mv = new ModelAndView();
+		
 		
 		System.out.println(photo.getOriginalFilename());
 		System.out.println(photo.getName());
 		System.out.println(photo.getSize());
 		System.out.println(photo.getContentType());
-		System.out.println(memberDTO.getEmail());
 		
 		int result = memberUserService.setMemberJoin(memberDTO, photo, session);
+		
 		mv.setViewName("redirect:../");
-
+		
 		return mv;
 	}
 	
+	//delete
 	@GetMapping("memberDelete")
-	public ModelAndView setMemberDelete(HttpSession session) throws Exception{
+	public ModelAndView setMemberDelete(HttpSession session)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		MemberDTO memberDTO= (MemberDTO)session.getAttribute("member");
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		int result = memberUserService.setMemberDelete(memberDTO);
 		session.invalidate();
 		mv.setViewName("redirect:../");
 		return mv;
 	}
 	
+	//setMemberUpdate
 	@GetMapping("memberUpdate")
-	public ModelAndView setMemberUpdate() throws Exception{
+	public ModelAndView setMemberUpdate()throws Exception{
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("member/memberUpdate");
 		return mv;
 	}
 	
 	@PostMapping("memberUpdate")
-	public ModelAndView setMemberUpdate(MemberDTO memberDTO, HttpSession session) throws Exception{
+	public ModelAndView setMemberUpdate(MemberDTO memberDTO, HttpSession session)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		MemberDTO s = (MemberDTO)session.getAttribute("member");
 		memberDTO.setId(s.getId());
 		
 		int result = memberUserService.setMemberUpdate(memberDTO);
 		
-		if(result>0) { //세션에 저장되어있는 옛날데이터를 수정해줌
+		if(result>0) {
 			s.setName(memberDTO.getName());
 			s.setEmail(memberDTO.getEmail());
 			session.setAttribute("member", s);
 		}
 		
 		mv.setViewName("redirect:./memberPage");
+		
 		return mv;
 	}
 	
-	//멤버페이지 넘길때 멤버파일 디티오 객체도 파라미터로 넘겨주기 
-	//컨트롤러에서 디비에서 가져오기 
 	@GetMapping("memberPage")
-	public ModelAndView getMemberPage() throws Exception{
+	public ModelAndView getMemberPage()throws Exception{
 		ModelAndView mv = new ModelAndView();
 //		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 //		MemberFileDTO memberFileDTO = memberUserService.getOne(memberDTO);
@@ -105,51 +109,49 @@ public class MemberUserController {
 	}
 
 	@GetMapping("memberLogout")
-	public ModelAndView getMemberLogout(HttpSession session) throws Exception{
-		//웹브러우저 종료
-		//일정시간경과 
-		//memberDTO를 NULL로 대체 
-		//유지시간을 강제를 0으로 변경
+	public ModelAndView getMemberLogout(HttpSession session)throws Exception{
+		//웹브라우저 종료
+		//일정시간 경과(로그인 후에 요청이 발생하면 시간이 연장)
+		//memberDTO를 NULL로 대체
+		//유지시간을 강제로 0으로 변경
 		session.invalidate();
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("redirect:../");
 		return mv;
 	}
-		
+	
+	//getMemberLogin
 	@GetMapping("memberLogin")
-	public ModelAndView getMemberLogin() throws Exception{
-		
+	public ModelAndView getMemberLogin()throws Exception{
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("member/memberLogin");
+		
 		return mv;
 	}
 	
 	@PostMapping("memberLogin")
-	public ModelAndView getMemberLogin(MemberDTO memberDTO, HttpSession session) throws Exception{
-		
+	public ModelAndView getMemberLogin(MemberDTO memberDTO, HttpSession session)throws Exception{
 		ModelAndView mv = new ModelAndView();
+		System.out.println(memberDTO.getId());
+		System.out.println(memberDTO.getPw());
 		memberDTO = memberUserService.getMemberLogin(memberDTO);
 		
 		if(memberDTO != null) {
 			//index 페이지로 이동
 			//redirect
-			//session에 member정보 저장해줌 
 			session.setAttribute("member", memberDTO);
-			mv.addObject("member", memberDTO);
 			mv.setViewName("redirect:../");
 			
 		}else {
 			//로그인 실패 메세지를 alert
-			//로그인 입력폼으로 이동 
-			//forward
+			//로그인 입력 폼 으로 이동
+			//foward
 			mv.addObject("msg", "Login Fail");
 			mv.addObject("path", "./memberLogin");
-			mv.setViewName("common/result");	
+			mv.setViewName("common/result");
 		}
 		
 		
-		
 		return mv;
-		
 	}
 }

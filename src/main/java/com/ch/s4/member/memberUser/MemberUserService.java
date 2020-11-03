@@ -22,24 +22,42 @@ public class MemberUserService implements MemberService {
 
 	@Autowired
 	private MemberUserDAO memberUserDAO;
-	
 	@Autowired
 	private MemberFileDAO memberFileDAO;
-	
 	@Autowired
 	private FileSaver fileSaver;
 	
+//	public MemberFileDTO getOne(MemberDTO memberDTO)throws Exception{
+//		return memberFileDAO.getOne(memberDTO);
+//	}
 	
 	@Override
-	public MemberDTO getMemberLogin(MemberDTO memberDTO) throws Exception {
+	public MemberDTO getMemberIdCheck(MemberDTO memberDTO) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println(memberDTO.getId());
-		System.out.println(memberDTO.getPw());
-		return memberUserDAO.getMemberLogin(memberDTO);
+		return memberUserDAO.getMemberIdCheck(memberDTO);
 	}
+	
 	@Override
-	public int setMemberUpdate(MemberDTO memberDTO) throws Exception{
-		return memberUserDAO.setMemberUpdate(memberDTO);
+	public int setMemberJoin(MemberDTO memberDTO, MultipartFile photo, HttpSession session) throws Exception {
+		//HDD 폴더에 , 이름
+		//저장할 폴더 경로
+		String path = session.getServletContext().getRealPath("/resources/upload/member");
+		System.out.println(path);
+		File file = new File(path);
+		String fileName="";
+		
+		int result = memberUserDAO.setMemberJoin(memberDTO);
+		
+		if(photo.getSize() !=0) {
+			fileName = fileSaver.saveCopy(file, photo);
+			MemberFileDTO memberFileDTO = new MemberFileDTO();
+			memberFileDTO.setId(memberDTO.getId());
+			memberFileDTO.setFileName(fileName);
+			memberFileDTO.setOriName(photo.getOriginalFilename());
+			result = memberFileDAO.setInsert(memberFileDTO);
+		}
+	
+		return  result;
 	}
 	
 	@Override
@@ -49,39 +67,15 @@ public class MemberUserService implements MemberService {
 	}
 	
 	@Override
-	public int setMemberJoin(MemberDTO memberDTO, MultipartFile photo, HttpSession session) throws Exception {
-		//HDD 폴더에, 이름 
-		//저장할 폴더 경로
-		String path = session.getServletContext().getRealPath("/resources/upload/member");
-		System.out.println(path);
-		File file = new File(path);
-		String fileName="";
-		
-		//순서 중요! 멤버 먼저 만들고 파일 집어넣기 
-		
-		int result = memberUserDAO.setMemberJoin(memberDTO);
-		if(photo.getSize()!=0) {
-			fileName = fileSaver.saveCopy(file, photo);
-			//memberFile Insert
-			MemberFileDTO memberFileDTO = new MemberFileDTO();
-			memberFileDTO.setId(memberDTO.getId());
-			memberFileDTO.setFileName(fileName);
-			memberFileDTO.setOriName(photo.getOriginalFilename());
-			System.out.println("ser:"+memberDTO.getEmail());
-			System.out.println(fileName);
-			result = memberFileDAO.setInsert(memberFileDTO);
-		}
-		return result;
+	public int setMemberUpdate(MemberDTO memberDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return memberUserDAO.setMemberUpdate(memberDTO);
 	}
 	
 	@Override
-	public MemberDTO getMemberIdCheck(MemberDTO memberDTO) throws Exception {
+	public MemberDTO getMemberLogin(MemberDTO memberDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return memberUserDAO.getMemberIdCheck(memberDTO);
+		return memberUserDAO.getMemberLogin(memberDTO);
 	}
-	
-//	public MemberFileDTO getOne(MemberDTO memberDTO) throws Exception{
-//		return memberFileDAO.getOne(memberDTO);
-//	}
 
 }
