@@ -5,41 +5,44 @@
 
     <mapper namespace="com.ch.s4.member.memberUser.MemberUserDAO">
     	
-    	<resultMap type="MemberUserDTO" id="getMemberLoginResult">
-    		<id column="num" property="num"></id>
-    		<result column="id" property="id"/>
-    		<result column="pw" property="pw"/>
-    		<result column="name" property="name"/>
-    		<result column="email" property="email"/> 
-    		<association property="memberFileDTO" javaType="MemberFileDTO" resultMap="memberFileResult">
-    			
-    		</association>
-    	</resultMap>
-    	
-    	<resultMap type="MemberFileDTO" id="memberFileResult">
-    		<id column="num" property="num"></id>
-    		<result column="id" property="id"></result>
-    		<result column="filename" property="fileName"></result>
-    		<result column="oriname" property="oriName"/> 
-    	</resultMap>
-    
-    	<select id="getMemberLogin" parameterType="MemberDTO" resultMap="getMemberLoginResult">
-    		select M.*, MF.* from member M inner join memberFile MF on (M.id = MF.id) where M.id=#{id} and M.pw = #{pw}
-    	</select>
-    	
-    	<update id="setMemberUpdate" parameterType="MemberDTO">
-    		update member set name=#{name} ,email=#{email} where id=#{id}
-    	</update>
-    	
-    	<delete id="setMemberDelete" parameterType="MemberDTO">
-    		delete member where id=#{id}
-    	</delete>
-    	
-    	<insert id="setMemberJoin" parameterType="MemberDTO">
-    		insert into member values(member_seq.nextval, #{id}, #{pw}, #{name}, #{email,jdbcType=VARCHAR})   
-    	</insert>
-    	
-    	<select id="getMemberIdCheck" parameterType="MemberDTO" resultType="MemberDTO">
-    		select id from member where id=#{id}
-    	</select>
+    	<select id="getMemberIdCheck" resultType="MemberDTO" parameterType="MemberDTO">
+		select id from member where id=#{id}
+	</select>
+	
+	<insert id="setMemberJoin" parameterType="MemberDTO">
+		insert into member values(member_seq.nextval, #{id}, #{pw}, #{name}, #{email, jdbcType=VARCHAR})
+	</insert>
+	
+	<delete id="setMemberDelete" parameterType="MemberDTO">
+		delete member where id=#{id}
+	</delete>
+	
+	<update id="setMemberUpdate" parameterType="MemberDTO">
+		update member set name=#{name}, email=#{email} where id=#{id}
+	</update>
+	
+	<resultMap type="MemberDTO" id="getMemberLoginResult">
+		<id column="num" property="num"></id>
+		<result column="id" property="id"/>
+		<result column="pw" property="pw"/>
+		<result column="name" property="name"/>
+		<result column="email" property="email"/>
+		<association property="memberFileDTO" javaType="MemberFileDTO" resultMap="memberFileResult" >
+		</association>
+	</resultMap>
+	
+	<resultMap type="MemberFileDTO" id="memberFileResult">
+			<id column="num" property="num"></id>
+			<result column="id" property="id"/>
+			<result column="filename" property="fileName"/>
+			<result column="oriname" property="oriName"/>
+	</resultMap>
+	
+	<select id="getMemberLogin" parameterType="MemberDTO" resultMap="getMemberLoginResult">
+		Select M.*, F.*
+		from member M inner join memberfile F
+		on (M.id = F.id)
+		where M.id = #{id} and M.pw = #{pw}
+	</select>
+	
     </mapper>

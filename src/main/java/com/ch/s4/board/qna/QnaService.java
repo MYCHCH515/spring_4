@@ -26,20 +26,19 @@ public class QnaService implements BoardService {
 	@Autowired
 	private FileSaver fileSaver;
 	
-	public boolean summernoteDelete(String file, HttpSession session) throws Exception{
+	public boolean summernoteDelete(String file, HttpSession session)throws Exception{
 		String path = session.getServletContext().getRealPath("/resources/upload/qna");
 		File file2 = new File(path, file);
-		
 		boolean result = false;
-		
 		if(file2.exists()) {
-			result = file2.delete();
+			result=file2.delete();
 		}
 		
 		return result;
 	}
 	
-	public String summernote(MultipartFile file, HttpSession session) throws Exception{
+	public String summernote(MultipartFile file, HttpSession session)throws Exception{
+		//파일을 하드 디스크에 저장하고 저장된 파일명을 리턴
 		String path = session.getServletContext().getRealPath("/resources/upload/qna");
 		System.out.println(path);
 		File dest = new File(path);
@@ -56,30 +55,26 @@ public class QnaService implements BoardService {
 	@Override
 	public int setInsert(BoardDTO boardDTO, MultipartFile[] files, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
-		
 		int result = qnaDAO.setInsert(boardDTO);
 		
-		String path = session.getServletContext().getRealPath("/resources/upload/qna");
+		String path = session.getServletContext().getRealPath("/resources/upload/qna/");
 		File file = new File(path);
-		System.out.println(path);
 		
 		for(int i=0;i<files.length;i++) {
-			MultipartFile multipartFile = files[i];
 			if(i==0) {
 				continue;
 			}
-	
-			if(multipartFile.getSize() !=0) {
+			MultipartFile multipartFile = files[i];
+			if( multipartFile.getSize() !=0) {
 				String fileName = fileSaver.saveCopy(file, multipartFile);
-				
 				BoardFileDTO boardFileDTO = new BoardFileDTO();
 				boardFileDTO.setFileName(fileName);
 				boardFileDTO.setOriName(multipartFile.getOriginalFilename());
 				boardFileDTO.setNum(boardDTO.getNum());
-				
 				qnaDAO.setInsertFile(boardFileDTO);
 			}
 		}
+		
 		return result;
 	}
 

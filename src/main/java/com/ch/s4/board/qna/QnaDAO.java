@@ -18,16 +18,17 @@ public class QnaDAO implements BoardDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.ch.s4.board.qna.QnaDAO.";
 	
-	public int setReply(BoardDTO boardDTO) throws Exception{
+	
+	public int setInsertFile(BoardFileDTO boardFileDTO)throws Exception{
+		return sqlSession.insert(NAMESPACE+"setInsertFile", boardFileDTO);
+	}
+	
+	public int setReply(BoardDTO boardDTO)throws Exception{
 		return sqlSession.insert(NAMESPACE+"setReply", boardDTO);
 	}
-	
-	public int setReplyUpdate(BoardDTO boardDTO) throws Exception{
+
+	public int setReplyUpdate(BoardDTO boardDTO)throws Exception{
 		return sqlSession.update(NAMESPACE+"setReplyUpdate", boardDTO);
-	}
-	
-	public int setInsertFile(BoardFileDTO boardFileDTO) throws Exception{
-		return sqlSession.insert(NAMESPACE+"setInsertFile", boardFileDTO);
 	}
 	
 	@Override
@@ -39,13 +40,13 @@ public class QnaDAO implements BoardDAO {
 	@Override
 	public int setUpdate(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.update(NAMESPACE+"setUpdate", boardDTO);
+		return 0;
 	}
 
 	@Override
 	public int setDelete(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.delete(NAMESPACE+"setDelete", boardDTO);
+		return 0;
 	}
 
 	@Override
@@ -67,3 +68,4 @@ public class QnaDAO implements BoardDAO {
 	}
 
 }
+
