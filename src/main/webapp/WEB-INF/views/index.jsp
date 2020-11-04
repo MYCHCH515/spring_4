@@ -23,6 +23,8 @@
 		<h1>LoginFail</h1>
 	</c:if>
 	<img alt="main_img" src="./resources/images/index/i2.jpg">
+	<a href="./cookie/makeCookie">MakeCookie</a>
+	<a href="./cookie/showCookie">ShowCookie</a>
 </div>
 </body>
 </html>
