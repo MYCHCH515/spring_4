@@ -17,7 +17,7 @@
 	 <form action="./memberLogin" method="post">
 	    <div class="form-group">
 	      <label for="id">Id:</label>
-	      <input type="text" class="form-control" id="id" placeholder="Enter id" name="id">
+	      <input type="text" class="form-control" value="${cookie.remember.value}" id="id" placeholder="Enter id" name="id">
 	    </div>
 	    <div class="form-group">
 	      <label for="pw">Password:</label>

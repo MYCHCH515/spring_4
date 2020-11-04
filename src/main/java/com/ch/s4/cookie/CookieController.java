@@ -19,9 +19,9 @@ public class CookieController {
 		System.out.println(cookie.getName());
 		System.out.println(cookie.getValue());
 		
+		//void면 주소 cookie.showCookie로 감 
 		
-		
-		//		Cookie [] cookies = request.getCookies();
+//		Cookie [] cookies = request.getCookies();
 //		for(Cookie cookie : cookies) {
 //			System.out.println(cookie.getName());
 //			System.out.println(cookie.getValue());
