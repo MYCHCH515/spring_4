@@ -145,7 +145,7 @@ public class MemberUserController {
 			response.addCookie(cookie);
 		}else {
 			Cookie cookie = new Cookie("remember", "");
-			cookie.setDomain("/cookie/showCookie");
+			//cookie.setDomain("/cookie/showCookie");
 			cookie.setMaxAge(0);
 			response.addCookie(cookie);
 		}
