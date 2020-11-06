@@ -8,6 +8,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.FileCopyUtils;
@@ -29,11 +30,16 @@ public class NoticeService implements BoardService {
 	@Autowired
 	private FileSaver fileSaver;
 	
+	@Value("#{fileSave['notice']}")
+	private String filePath;
+	
+	
+	
 	@Override
 	public int setInsert(BoardDTO boardDTO, MultipartFile[] files, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
 		//파일을 HDD에 저장 
-		String path = session.getServletContext().getRealPath("/resources/upload/notice");
+		String path = session.getServletContext().getRealPath("filePath");
 		File file = new File(path);
 		System.out.println(path);
 		
